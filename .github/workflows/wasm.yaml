@@ -1,0 +1,18 @@
+name: wasm-bundle
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: ./wasi.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: install-prefix
+          path: prefix/
