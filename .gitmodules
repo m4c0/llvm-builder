@@ -2,3 +2,7 @@
 	path = llvm-project
 	url = https://github.com/llvm/llvm-project.git
 	branch = llvmorg-15.0.4
+[submodule "wasi-libc"]
+	path = wasi-libc
+	url = https://github.com/WebAssembly/wasi-libc.git
+	branch = wasi-sdk-16
