@@ -2,9 +2,6 @@
 
 set -ex
 
-export CC=${LLVM}/bin/clang
-export CXX="${LLVM}/bin/clang++ -fno-exceptions"
-
 export INSTALL=`pwd`/prefix
 export SYSROOT=$INSTALL/sysroot
 
@@ -12,7 +9,7 @@ make -C wasi-libc
 
 cmake -G Ninja -S llvm-project/runtimes -B build/runtimes \
   -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;compiler-rt" \
-  -DLLVM_CONFIG_PATH=$LLVM/bin/llvm-config \
+  -DLLVM_CONFIG_PATH=${LLVM_CONFIG} \
   -DCMAKE_C_COMPILER_WORKS=ON \
   -DCMAKE_CXX_COMPILER_WORKS=ON \
   -DCMAKE_TOOLCHAIN_FILE=`pwd`/wasi-toolchain.cmake \

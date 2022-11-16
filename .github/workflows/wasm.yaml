@@ -8,9 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      LLVM: /usr
+      AR: llvm-ar-15
+      CC: clang-15
+      CXX: clang++-15
+      LLVM_CONFIG: llvm-config-15
+      NM: llvm-nm-15
     steps:
-      - run: sudo apt-get install -y llvm
+      - run: sudo apt-get install -y ninja-build
+      - run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
       - uses: actions/checkout@v3
         with:
           submodules: true
