@@ -3,7 +3,7 @@
 set -ex
 
 export CC=${LLVM}/bin/clang
-export CXX=${LLVM}/bin/clang++
+export CXX="${LLVM}/bin/clang++ -fno-exceptions"
 
 export INSTALL=`pwd`/prefix
 export SYSROOT=$INSTALL/sysroot
