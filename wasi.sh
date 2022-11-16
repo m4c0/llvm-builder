@@ -44,4 +44,5 @@ ninja -C build/runtimes install-cxx install-cxxabi install-compiler-rt
 pushd $INSTALL
 mv sysroot/include include/wasm32-wasi
 mv sysroot/lib/wasm32-wasi lib
+mv lib/libc++* lib/wasm32-wasi
 popd
