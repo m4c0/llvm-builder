@@ -1,11 +1,11 @@
-name: wasm-bundle
+name: build-bundles
 on:
   workflow_dispatch:
   push:
   pull_request:
 
 jobs:
-  build:
+  wasm:
     runs-on: ubuntu-latest
     env:
       AR: llvm-ar-15
@@ -24,3 +24,12 @@ jobs:
         with:
           name: install-prefix
           path: prefix/
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: cmake -G Ninja -S llvm-project/runtimes -B build/runtimes -DLLVM_ENABLE_RUNTIMES="libcxx" -DLIBCXX_CXX_ABI="vcruntime" -DCMAKE_C_COMPILER="clang-cl" -DCMAKE_CXX_COMPILER="clang-cl"
+      - run: ninja -C build/runtimes cxx
+      - run: ninja -C build/runtimes install-cxx
